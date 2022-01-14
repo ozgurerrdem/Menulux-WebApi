@@ -76,10 +76,11 @@ namespace Menulux.Controllers
                 {
                     return BadRequest("Dosya boş olduğu için yüklenemedi");
                 }
-
+                List<CloudBlockBlob> blobList = new List<CloudBlockBlob>();
                 for (int i = 0; i < files.Count; i++)
                 {
                     var blob = _blobContainer.GetBlockBlobReference(GetRandomBlobName(files[i].FileName));
+                    blobList.Add(blob);
                     using (var stream = files[i].OpenReadStream())
                     {
                         await blob.UploadFromStreamAsync(stream);

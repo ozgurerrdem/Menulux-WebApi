@@ -39,7 +39,10 @@ namespace Menulux
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();    
+                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Menulux v1"));
             }
 
             app.UseHttpsRedirection();
