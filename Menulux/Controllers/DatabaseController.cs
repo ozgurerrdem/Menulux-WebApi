@@ -13,10 +13,10 @@ namespace Menulux.Controllers
     [ApiController]
     public class DatabaseController : ControllerBase
     {
-        static CloudBlobClient _blobClient;
-        const string _blobContainerName = "imagecontainer";
+        private static CloudBlobClient _blobClient;
+        private const string _blobContainerName = "imagecontainer";
         private readonly IConfiguration _configuration;
-        static CloudBlobContainer _blobContainer;
+        private static CloudBlobContainer _blobContainer;
 
         public DatabaseController(IConfiguration configuration)
         {
