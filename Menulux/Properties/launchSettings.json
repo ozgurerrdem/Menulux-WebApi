@@ -12,8 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      //"launchUrl": "api/database",
-      "launchUrl": "swagger",
+      "launchUrl": "api/database",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
