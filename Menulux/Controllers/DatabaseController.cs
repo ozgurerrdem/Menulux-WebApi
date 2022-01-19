@@ -39,7 +39,8 @@ namespace Menulux.Controllers
 
                 await _blobContainer.SetPermissionsAsync(new BlobContainerPermissions { PublicAccess = BlobContainerPublicAccessType.Blob });
 
-                List<Uri> allBlobs = new List<Uri>();
+                var blobList = new List<string>();
+
                 BlobContinuationToken blobContinuationToken = null;
                 do
                 {
@@ -47,12 +48,12 @@ namespace Menulux.Controllers
                     foreach (IListBlobItem blob in response.Results)
                     {
                         if (blob.GetType() == typeof(CloudBlockBlob))
-                            allBlobs.Add(blob.Uri);
+                            blobList.Add(blob.Uri.ToString());
                     }
                     blobContinuationToken = response.ContinuationToken;
                 } while (blobContinuationToken != null);
 
-                return Ok(allBlobs);
+                return Ok((object) new { UrlList = blobList });
             }
             catch (Exception ex)
             {
@@ -83,7 +84,6 @@ namespace Menulux.Controllers
                     using (var stream = files[i].OpenReadStream())
                     {
                         await blob.UploadFromStreamAsync(stream);
-
                     }
                 }
                 return RedirectToAction("Get");
